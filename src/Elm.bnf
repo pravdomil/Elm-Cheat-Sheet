@@ -105,8 +105,8 @@ TypeVariableName ::= LowercaseName
 TypeVariantName ::= UppercaseName
 
 ValueName ::= LowercaseName
-FieldName ::= LowercaseName
 VariableName ::= LowercaseName
+FieldName ::= LowercaseName
 
 // More names
 LowercaseName ::= "LowercaseName" // [a-z] ([A-Z] | [a-z] | "_")*
