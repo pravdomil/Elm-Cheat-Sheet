@@ -40,8 +40,7 @@ Expression ::=
     | "if" Expression "then" Expression ("else" "if" Expression "then" Expression)* "else" Expression
     | "case" Expression "of" (Pattern "->" Expression)+
     | "\\" DestructingPattern+ "->" Expression
-    | SingleExpression+
-    | SingleExpression (OperatorSymbol SingleExpression)*
+    | SingleExpression (OperatorSymbol? SingleExpression)*
 
 SingleExpression ::=
     Number
