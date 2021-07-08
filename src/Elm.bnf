@@ -32,7 +32,7 @@ SingleTypeExpression ::=
     | "(" ")"
     | "(" TypeExpression "," TypeExpression ")"
     | "(" TypeExpression "," TypeExpression "," TypeExpression ")"
-    | "{" ((TypeVariableName "|")? (RecordFieldName ":" TypeExpression) ("," RecordFieldName ":" TypeExpression)*)? "}"
+    | "{" ((TypeVariableName "|")? (FieldName ":" TypeExpression) ("," FieldName ":" TypeExpression)*)? "}"
     | "(" TypeExpression ")"
 
 Expression ::=
@@ -50,16 +50,16 @@ SingleExpression ::=
     | "(" ")"
     | "(" Expression "," Expression ")"
     | "(" Expression "," Expression "," Expression ")"
-    | "{" ((VariableName "|")? RecordFieldName "=" Expression ("," RecordFieldName "=" Expression)*)? "}" ("." RecordFieldName)*
+    | "{" ((VariableName "|")? FieldName "=" Expression ("," FieldName "=" Expression)*)? "}" ("." FieldName)*
     | "[glsl|" OpenGLShadingLanguage "|]"
 
     | (ModuleName ".")? TypeVariantName
-    | (ModuleName ".")? ValueName ("." RecordFieldName)*
-    | VariableName ("." RecordFieldName)*
-    | "." RecordFieldName
+    | (ModuleName ".")? ValueName ("." FieldName)*
+    | VariableName ("." FieldName)*
+    | "." FieldName
     | "(" OperatorSymbol ")"
 
-    | "-"? "(" Expression ")" ("." RecordFieldName)*
+    | "-"? "(" Expression ")" ("." FieldName)*
 
 Pattern ::=
     (SinglePattern ("as" VariableName)? ('::' SinglePattern ("as" VariableName)?)*)
@@ -75,7 +75,7 @@ SinglePattern ::=
     | "(" ")"
     | "(" Pattern "," Pattern ")"
     | "(" Pattern "," Pattern "," Pattern ")"
-    | "{" (RecordFieldName ("," RecordFieldName)*)? "}"
+    | "{" (FieldName ("," FieldName)*)? "}"
     | "(" Pattern ")"
 
 DestructingPattern ::=
@@ -86,7 +86,7 @@ DestructingPattern ::=
     | "(" ")"
     | "(" DestructingPattern "," DestructingPattern ")"
     | "(" DestructingPattern "," DestructingPattern "," DestructingPattern ")"
-    | "{" (RecordFieldName ("," RecordFieldName)*)? "}"
+    | "{" (FieldName ("," FieldName)*)? "}"
     | "(" DestructingPattern "as" VariableName ")"
     | "(" DestructingPattern ")"
 
@@ -105,7 +105,7 @@ TypeVariableName ::= LowercaseName
 TypeVariantName ::= UppercaseName
 
 ValueName ::= LowercaseName
-RecordFieldName ::= LowercaseName
+FieldName ::= LowercaseName
 VariableName ::= LowercaseName
 
 // More names
