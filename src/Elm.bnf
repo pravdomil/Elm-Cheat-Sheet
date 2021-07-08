@@ -13,7 +13,7 @@ Import ::=
 ExposedItem ::=
     TypeName ("(" ".." ")")?
     | ValueName
-    | "(" OperatorName ")"
+    | "(" OperatorSymbol ")"
 
 Declaration ::=
     "type" TypeName TypeVariableName* "=" TypeVariantName SingleTypeExpression* ("|" TypeVariantName SingleTypeExpression*)*
@@ -41,7 +41,7 @@ Expression ::=
     | "case" Expression "of" (Pattern "->" Expression)+
     | "\\" DestructingPattern+ "->" Expression
     | SingleExpression+
-    | SingleExpression (OperatorName SingleExpression)*
+    | SingleExpression (OperatorSymbol SingleExpression)*
 
 SingleExpression ::=
     Number
@@ -58,7 +58,7 @@ SingleExpression ::=
     | (ModuleName ".")? ValueName ("." RecordFieldName)*
     | VariableName ("." RecordFieldName)*
     | "." RecordFieldName
-    | "(" OperatorName ")"
+    | "(" OperatorSymbol ")"
 
     | "-"? "(" Expression ")" ("." RecordFieldName)*
 
@@ -112,4 +112,4 @@ VariableName ::= LowercaseName
 // More names
 LowercaseName ::= "LowercaseName" // [a-z] ([A-Z] | [a-z] | "_")*
 UppercaseName ::= "UppercaseName" // [A-Z] ([A-Z] | [a-z] | "_")*
-OperatorName ::= ("!" | "$" | "^" | "|" | "*" | "/" | "?" | "+" | "~" | "." | "-" | "=" | "@" | "#" | "%" | "&" | "<" | ">" | ":")+
+OperatorSymbol ::= ("!" | "$" | "^" | "|" | "*" | "/" | "?" | "+" | "~" | "." | "-" | "=" | "@" | "#" | "%" | "&" | "<" | ">" | ":")+
