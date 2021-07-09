@@ -1,3 +1,16 @@
+Elm ::=
+    Application
+    | Package
+
+Application ::=
+    ElmJson ElmFile+
+
+Package ::=
+    ElmJson ElmFile+
+
+ElmJson ::=
+    "ElmJson"
+
 ElmFile ::=
     Module
 
