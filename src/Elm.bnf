@@ -122,6 +122,6 @@ VariableName ::= LowercaseName
 FieldName ::= LowercaseName
 
 // More names
-LowercaseName ::= "LowercaseName" // [a-z] ([A-Za-z_])*
-UppercaseName ::= "UppercaseName" // [A-Z] ([A-Za-z_])*
+LowercaseName ::= "LowercaseName" // [a-z] ([0-9A-Za-z_])*
+UppercaseName ::= "UppercaseName" // [A-Z] ([0-9A-Za-z_])*
 OperatorSymbol ::= ("!" | "$" | "^" | "|" | "*" | "/" | "?" | "+" | "~" | "." | "-" | "=" | "@" | "#" | "%" | "&" | "<" | ">" | ":")+
