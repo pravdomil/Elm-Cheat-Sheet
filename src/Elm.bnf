@@ -1,0 +1,115 @@
+ElmFile ::=
+    Module
+
+Module ::=
+    Definition Import* Declaration+
+
+Definition ::=
+    "port"? "module" ModuleName "exposing" "(" (".." | ExposedItem ("," ExposedItem)*) ")"
+
+Import ::=
+    "import" ModuleName ("as" ModuleAliasName)? ("exposing" "(" (".." | ExposedItem ("," ExposedItem)*) ")")?
+
+ExposedItem ::=
+    TypeName ("(" ".." ")")?
+    | ValueName
+    | "(" OperatorName ")"
+
+Declaration ::=
+    "type" TypeName TypeVariableName* "=" TypeVariantName SingleTypeExpression* ("|" TypeVariantName SingleTypeExpression*)*
+    | "type" "alias" TypeName TypeVariableName* "=" TypeExpression
+    | ValueName ":" TypeExpression
+    | ValueName DestructingPattern* "=" Expression
+    | "port" ValueName ":" TypeExpression
+
+TypeExpression ::=
+    (SingleTypeExpression | (ModuleName ".")? TypeName (SingleTypeExpression)*)
+    ("->" (SingleTypeExpression | (ModuleName ".")? TypeName (SingleTypeExpression)*))*
+
+SingleTypeExpression ::=
+    (ModuleName ".")? TypeName
+    | TypeVariableName
+    | "(" ")"
+    | "(" TypeExpression "," TypeExpression ")"
+    | "(" TypeExpression "," TypeExpression "," TypeExpression ")"
+    | "{" ((TypeVariableName "|")? (RecordFieldName ":" TypeExpression) ("," RecordFieldName ":" TypeExpression)*)? "}"
+    | "(" TypeExpression ")"
+
+Expression ::=
+    "let" (ValueName ":" TypeExpression | (ValueName DestructingPattern* | DestructingPattern) "=" Expression)+ "in" Expression
+    | "if" Expression "then" Expression ("else" "if" Expression "then" Expression)* "else" Expression
+    | "case" Expression "of" (Pattern "->" Expression)+
+    | "\\" DestructingPattern+ "->" Expression
+    | SingleExpression+
+    | SingleExpression (OperatorName SingleExpression)*
+
+SingleExpression ::=
+    Number
+    | Char
+    | String
+    | "[" (Expression ("," Expression)*)? "]"
+    | "(" ")"
+    | "(" Expression "," Expression ")"
+    | "(" Expression "," Expression "," Expression ")"
+    | "{" ((VariableName "|")? RecordFieldName "=" Expression ("," RecordFieldName "=" Expression)*)? "}" ("." RecordFieldName)*
+    | "[glsl|" OpenGLShadingLanguage "|]"
+
+    | (ModuleName ".")? TypeVariantName
+    | (ModuleName ".")? ValueName ("." RecordFieldName)*
+    | VariableName ("." RecordFieldName)*
+    | "." RecordFieldName
+    | "(" OperatorName ")"
+
+    | "-"? "(" Expression ")" ("." RecordFieldName)*
+
+Pattern ::=
+    (SinglePattern ("as" VariableName)? ('::' SinglePattern ("as" VariableName)?)*)
+
+SinglePattern ::=
+    TypeVariantName SinglePattern*
+    | VariableName
+    | "_"
+    | Number
+    | Char
+    | String
+    | "[" (Pattern ("," Pattern)*)? "]"
+    | "(" ")"
+    | "(" Pattern "," Pattern ")"
+    | "(" Pattern "," Pattern "," Pattern ")"
+    | "{" (RecordFieldName ("," RecordFieldName)*)? "}"
+    | "(" Pattern ")"
+
+DestructingPattern ::=
+    "(" (ModuleName ".")? TypeVariantName DestructingPattern* ")"
+    | (ModuleName ".")? TypeVariantName
+    | VariableName
+    | "_"
+    | "(" ")"
+    | "(" DestructingPattern "," DestructingPattern ")"
+    | "(" DestructingPattern "," DestructingPattern "," DestructingPattern ")"
+    | "{" (RecordFieldName ("," RecordFieldName)*)? "}"
+    | "(" DestructingPattern "as" VariableName ")"
+    | "(" DestructingPattern ")"
+
+// Literals
+Number ::= "Number"
+Char ::= "Char"
+String ::= "String"
+OpenGLShadingLanguage ::= "OpenGLShadingLanguage"
+
+// Names
+ModuleName ::= UppercaseName ("." UppercaseName)*
+ModuleAliasName ::= UppercaseName
+
+TypeName ::= UppercaseName
+TypeVariableName ::= LowercaseName
+TypeVariantName ::= UppercaseName
+
+ValueName ::= LowercaseName
+RecordFieldName ::= LowercaseName
+VariableName ::= LowercaseName
+
+// More names
+LowercaseName ::= "LowercaseName" // [a-z] ([A-Z] | [a-z] | "_")*
+UppercaseName ::= "UppercaseName" // [A-Z] ([A-Z] | [a-z] | "_")*
+OperatorName ::= ("!" | "$" | "^" | "|" | "*" | "/" | "?" | "+" | "~" | "." | "-" | "=" | "@" | "#" | "%" | "&" | "<" | ">" | ":")+
