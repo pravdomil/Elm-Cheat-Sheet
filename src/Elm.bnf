@@ -42,6 +42,7 @@ TypeExpression ::=
 SingleTypeExpression ::=
     (ModuleName ".")? TypeName
     | TypeVariableName
+    | ConstrainedType
     | "(" ")"
     | "(" TypeExpression "," TypeExpression ")"
     | "(" TypeExpression "," TypeExpression "," TypeExpression ")"
@@ -115,6 +116,7 @@ ModuleAliasName ::= UppercaseName
 TypeName ::= UppercaseName
 TypeVariableName ::= LowercaseName
 TypeVariantName ::= UppercaseName
+ConstrainedType ::= "number" | "appendable" | "comparable" | "compappend"
 
 ValueName ::= LowercaseName
 FieldName ::= LowercaseName
