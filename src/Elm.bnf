@@ -63,23 +63,22 @@ SingleExpression ::=
     | "(" ")"
     | "(" Expression "," Expression ")"
     | "(" Expression "," Expression "," Expression ")"
-    | "{" ((VariableName "|")? FieldName "=" Expression ("," FieldName "=" Expression)*)? "}" ("." FieldName)*
+    | "{" ((ValueName "|")? FieldName "=" Expression ("," FieldName "=" Expression)*)? "}" ("." FieldName)*
     | "[glsl|" OpenGLShadingLanguage "|]"
 
     | (ModuleName ".")? TypeVariantName
     | (ModuleName ".")? ValueName ("." FieldName)*
-    | VariableName ("." FieldName)*
     | "." FieldName
     | "(" OperatorSymbol ")"
 
     | "-"? "(" Expression ")" ("." FieldName)*
 
 Pattern ::=
-    (SinglePattern ("as" VariableName)? ('::' SinglePattern ("as" VariableName)?)*)
+    (SinglePattern ("as" ValueName)? ('::' SinglePattern ("as" ValueName)?)*)
 
 SinglePattern ::=
     TypeVariantName SinglePattern*
-    | VariableName
+    | ValueName
     | "_"
     | Number
     | Char
@@ -94,13 +93,13 @@ SinglePattern ::=
 DestructingPattern ::=
     "(" (ModuleName ".")? TypeVariantName DestructingPattern* ")"
     | (ModuleName ".")? TypeVariantName
-    | VariableName
+    | ValueName
     | "_"
     | "(" ")"
     | "(" DestructingPattern "," DestructingPattern ")"
     | "(" DestructingPattern "," DestructingPattern "," DestructingPattern ")"
     | "{" (FieldName ("," FieldName)*)? "}"
-    | "(" DestructingPattern "as" VariableName ")"
+    | "(" DestructingPattern "as" ValueName ")"
     | "(" DestructingPattern ")"
 
 // Literals
@@ -118,7 +117,6 @@ TypeVariableName ::= LowercaseName
 TypeVariantName ::= UppercaseName
 
 ValueName ::= LowercaseName
-VariableName ::= LowercaseName
 FieldName ::= LowercaseName
 
 // More names
