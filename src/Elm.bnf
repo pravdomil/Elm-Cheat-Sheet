@@ -78,7 +78,7 @@ Pattern ::=
     (SinglePattern ("as" ValueName)? ('::' SinglePattern ("as" ValueName)?)*)
 
 SinglePattern ::=
-    TypeVariantName SinglePattern*
+    (ModuleName ".")? TypeVariantName SinglePattern*
     | ValueName
     | "_"
     | Number
