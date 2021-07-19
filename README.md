@@ -2,4 +2,8 @@
 
 [View PDF](elm-cheat-sheet.pdf).
 
-**Not included:** OperatorSymbol, infix operators, effect modules.
+**Not included:**
+- effect modules
+- infix operators
+- OperatorSymbol
+- UTF-8 characaters in names
