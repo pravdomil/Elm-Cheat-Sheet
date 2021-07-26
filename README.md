@@ -1,5 +1,7 @@
 # Elm Cheat Sheet
 
+Printable cheat sheet for Elm.
+
 [View PDF](elm-cheat-sheet.pdf).
 
 **Not included:**
